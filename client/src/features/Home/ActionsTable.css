@@ -3,9 +3,10 @@
   margin: 2rem auto;
   box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
   border-radius: 8px;
-  background-color: #fff;
+  background-color: var(--card-bg);
   overflow-x: auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color);
 }
 
 .actions-table {
@@ -17,24 +18,21 @@
 .actions-table td {
   padding: 1rem 1.5rem;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid var(--border-color);
   font-size: 1rem;
-  color: #333;
+  color: var(--text-color);
 }
 
 .actions-table thead {
-  background-color: #007acc;
-  /* Remove general white color here */
-  /* color: white; */
+  background-color: var(--link-color);
 }
 
-/* Make only the first header cell text white */
 .actions-table th:first-child {
-  color: white;
+  color: var(--bg-color);
 }
 
 .actions-table tbody tr:hover {
-  background-color: #f0f8ff;
+  background-color: var(--border-color);
 }
 
 .actions-col {
@@ -43,9 +41,9 @@
 }
 
 .navigate-btn {
-  background-color: #007acc;
+  background-color: var(--link-color);
   border: none;
-  color: white;
+  color: var(--bg-color);
   padding: 0.4rem 0.8rem;
   border-radius: 4px;
   cursor: pointer;
@@ -54,14 +52,14 @@
 }
 
 .navigate-btn:hover {
-  background-color: #005f99;
+  background-color: #005f99; /* Could also make a variable if you want */
   box-shadow: 0 2px 6px rgb(0 0 0 / 0.15);
 }
 
 .go-button {
   display: inline-block;
-  background-color: #007acc;
-  color: white;
+  background-color: var(--link-color);
+  color: var(--bg-color);
   padding: 0.4rem 1rem;
   font-weight: 600;
   border-radius: 4px;
@@ -76,7 +74,7 @@
 
 .go-button:hover,
 .go-button:focus {
-  background-color: #005f99;
+  background-color: #005f99; /* Also could be a variable */
   box-shadow: 0 0 8px rgba(0, 122, 204, 0.7);
   outline: none;
 }

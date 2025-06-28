@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { observer } from "mobx-react-lite";
+import ThemeToggle from "../Theme/ThemeToggle";
+
 export default observer(function Navbar() {
     const [actionsOpen, setActionsOpen] = useState(false);
 
@@ -30,7 +32,6 @@ export default observer(function Navbar() {
 
             <div className="navbar-center">
                 <Link to="/" className="home-icon" title="Home">
-                    {/* Replace this with any icon you want */}
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         height="32"
@@ -42,6 +43,10 @@ export default observer(function Navbar() {
                     </svg>
                 </Link>
             </div>
+
+            <div className="navbar-right">
+                <ThemeToggle />
+            </div>
         </nav>
     );
-})
+});
