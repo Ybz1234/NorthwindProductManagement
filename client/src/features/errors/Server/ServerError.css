@@ -1,0 +1,22 @@
+.server-error-container {
+  padding: 40px;
+  text-align: center;
+}
+
+.error-message {
+  color: red;
+}
+
+.error-details {
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.error-details code {
+  display: block;
+  margin-top: 10px;
+  white-space: pre-wrap;
+}

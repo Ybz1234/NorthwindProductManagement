@@ -1,0 +1,23 @@
+.notfound-container {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.notfound-container h2 {
+  font-size: 1.5rem;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.btn {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 16px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,12 @@
+.validation-error {
+  border: 1px solid red;
+  background-color: #ffe6e6;
+  padding: 16px;
+  margin-top: 16px;
+  color: #900;
+}
+
+.validation-error ul {
+  list-style: disc;
+  margin-left: 20px;
+}

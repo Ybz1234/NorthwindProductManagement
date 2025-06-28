@@ -1,0 +1,82 @@
+.actions-table-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+  border-radius: 8px;
+  background-color: #fff;
+  overflow-x: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.actions-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.actions-table th,
+.actions-table td {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  font-size: 1rem;
+  color: #333;
+}
+
+.actions-table thead {
+  background-color: #007acc;
+  /* Remove general white color here */
+  /* color: white; */
+}
+
+/* Make only the first header cell text white */
+.actions-table th:first-child {
+  color: white;
+}
+
+.actions-table tbody tr:hover {
+  background-color: #f0f8ff;
+}
+
+.actions-col {
+  width: 80px;
+  text-align: center;
+}
+
+.navigate-btn {
+  background-color: #007acc;
+  border: none;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.navigate-btn:hover {
+  background-color: #005f99;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.15);
+}
+
+.go-button {
+  display: inline-block;
+  background-color: #007acc;
+  color: white;
+  padding: 0.4rem 1rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+}
+
+.go-button:hover,
+.go-button:focus {
+  background-color: #005f99;
+  box-shadow: 0 0 8px rgba(0, 122, 204, 0.7);
+  outline: none;
+}

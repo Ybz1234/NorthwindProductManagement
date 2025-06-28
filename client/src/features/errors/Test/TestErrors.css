@@ -1,0 +1,23 @@
+.test-errors {
+  margin: 40px;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.button-group button {
+  padding: 10px 14px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.button-group button:hover {
+  background-color: #e0e0e0;
+}

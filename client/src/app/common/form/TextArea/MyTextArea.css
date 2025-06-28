@@ -1,0 +1,37 @@
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.form-field label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.custom-textarea {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 80px;
+  background-color: white;
+  color: #333;
+}
+
+.custom-textarea:focus {
+  border-color: #85b7d9;
+  outline: none;
+}
+
+.error .custom-textarea {
+  border-color: red;
+}
+
+.error-label {
+  margin-top: 0.3rem;
+  color: red;
+  font-size: 0.875rem;
+}

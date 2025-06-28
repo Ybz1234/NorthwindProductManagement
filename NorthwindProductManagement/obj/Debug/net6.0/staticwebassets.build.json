@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "hcYQ1m7UNmPGNagQTuW0Do+G29BNxc/xQDBfqYkYMqY=",
+  "Source": "NorthwindProductManagement",
+  "BasePath": "_content/NorthwindProductManagement",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
