@@ -19,6 +19,8 @@ namespace NorthwindProductManagement.Core
 
             CreateMap<CreateProductDto, Product>();
             CreateMap<UpdateProductDto, Product>();
+            CreateMap<Supplier, SupplierDto>();
+            CreateMap<Category, CategoryDto>();
         }
     }
 }

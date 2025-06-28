@@ -13,8 +13,8 @@ export type TableProps<T> = {
   columns: Column<T>[];
   data: T[];
   rowKey: (row: T) => string | number;
-  containerClassName?: string; // optional container class name
-  tableClassName?: string; // optional table class name
+  containerClassName?: string;
+  tableClassName?: string;
 };
 
 export function Table<T>({

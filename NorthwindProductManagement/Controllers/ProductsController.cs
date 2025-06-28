@@ -7,6 +7,12 @@ namespace NorthwindProductManagement.Controllers
 {
     public class ProductsController : BaseApiController
     {
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProduct(int id)
+        {
+            return Ok(await Mediator.Send(new Details.Query { Id = id }));
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {

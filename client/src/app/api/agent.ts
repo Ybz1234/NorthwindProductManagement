@@ -4,6 +4,12 @@ import { toast } from "react-toastify";
 import { store } from "../stores/store";
 import { Router } from "../router/Routes";
 import type { ICustomerOrder } from "../models/customerOrder";
+import type { IProduct } from "../models/product";
+import type { ISupplierDto } from "../models/supplierDto";
+import type { ICategoryDto } from "../models/categoryDto";
+import type { ICreateProductDto } from "../models/CreateProductDto";
+import type { IProductDetailsDto } from "../models/productDetails";
+
 
 const sleep = (delay: number) => {
     return new Promise((resolve) => {
@@ -78,16 +84,28 @@ const requestsArray = {
 };
 
 const Customers = {
-  getOrderCounts: async () => {
-    const result = await requests.get<ICustomerOrder[]>('/Customers/orders-count');
-    console.log('API response for getOrderCounts:', result);
-    return result;
-  }
+    getOrderCounts: () => requests.get<ICustomerOrder[]>('/Customers/orders-count'),
 };
 
+const Products = {
+    create: (dto: ICreateProductDto) => requests.post<void>('/Products', dto),
+    getAll: () => requests.get<IProduct[]>('/Products'),
+    getById: (id: number) => requests.get<IProductDetailsDto>(`/Products/${id}`),
+};
+
+const Suppliers = {
+    list: () => requests.get<ISupplierDto[]>('/Suppliers'),
+};
+
+const Categories = {
+    list: () => requests.get<ICategoryDto[]>('/Categories'),
+};
 
 const agent = {
-    Customers
-}
+    Categories,
+    Customers,
+    Products,
+    Suppliers
+};
 
 export default agent;

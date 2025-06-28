@@ -1,0 +1,44 @@
+.products-table-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color);
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.products-table th,
+.products-table td {
+  padding: 1rem 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.products-table thead {
+  background-color: var(--link-color);
+  color: var(--bg-color);
+}
+
+.products-table tbody tr:hover {
+  background-color: var(--border-color);
+}
+
+.loading,
+.error {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 40px;
+  color: var(--text-color);
+}
+
+.search-input {
+  padding: 8px 12px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+  width: 100%;
+  max-width: 400px;
+}
