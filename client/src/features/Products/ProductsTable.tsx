@@ -22,7 +22,7 @@ export default observer(function ProductsTable() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   const navigate = useNavigate();
-  const pageSize = 10;
+  const pageSize = 8;
 
   useEffect(() => {
     if (!data) return;
@@ -37,39 +37,37 @@ export default observer(function ProductsTable() {
   }, [searchQuery, data]);
 
   const handleDeleteConfirm = useCallback(async () => {
-  if (!productToDelete) return;
-  setIsDeleting(true);
-  try {
-    await agent.Products.delete(productToDelete.productID);
-    toast.success(`Deleted product: ${productToDelete.productName}`);
-    setProductToDelete(null);
-    window.location.reload(); // or better: refetch products list
-  } catch (error: any) {
-    const backendMsg = error?.response?.data?.message;
+    if (!productToDelete) return;
+    setIsDeleting(true);
+    try {
+      await agent.Products.delete(productToDelete.productID);
+      toast.success(`Deleted product: ${productToDelete.productName}`);
+      setProductToDelete(null);
+      window.location.reload(); // or better: refetch products list
+    } catch (error: any) {
+      const backendMsg = error?.response?.data?.message;
 
-    if (
-      backendMsg?.toLowerCase().includes("referenced by existing orders") ||
-      backendMsg?.toLowerCase().includes("cannot delete product")
-    ) {
-      toast.error(
-        "Cannot delete product because it is referenced by existing orders."
-      );
-    } else if (error.response?.status === 500) {
-      toast.error("Server error. Please try again later.");
-    } else {
-      toast.error(
-        backendMsg || "Failed to delete product. Please try again."
-      );
+      if (
+        backendMsg?.toLowerCase().includes("referenced by existing orders") ||
+        backendMsg?.toLowerCase().includes("cannot delete product")
+      ) {
+        toast.error(
+          "Cannot delete product because it is referenced by existing orders."
+        );
+      } else if (error.response?.status === 500) {
+        toast.error("Server error. Please try again later.");
+      } else {
+        toast.error(
+          backendMsg || "Failed to delete product. Please try again."
+        );
+      }
+
+      console.error(error);
+    } finally {
+      setIsDeleting(false);
     }
+  }, [productToDelete]);
 
-    console.error(error);
-  } finally {
-    setIsDeleting(false);
-  }
-}, [productToDelete]);
-
-
-  // Close modal on Escape key
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape" && !isDeleting) setProductToDelete(null);

@@ -19,8 +19,12 @@ body {
     color: var(--text-color);
     transition: background-color 0.3s, color 0.3s;
 }
-
-/* Apply variables */
+.main-content {
+  padding-top: 56px; /* same as navbar height */
+  max-width: 1000px;
+  margin: 2rem auto;
+  font-family: Arial, sans-serif;
+}
 table,
 .summary-box,
 .summary-card,
