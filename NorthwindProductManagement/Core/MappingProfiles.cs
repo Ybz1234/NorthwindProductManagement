@@ -15,10 +15,15 @@ namespace NorthwindProductManagement.Core
             CreateMap<Product, ProductDetailsDto>()
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Category.CategoryName))
                 .ForMember(dest => dest.Supplier, opt => opt.MapFrom(src => src.Supplier.CompanyName))
-                .ForMember(dest => dest.Units, opt => opt.MapFrom(src => src.UnitsInStock));
+                .ForMember(dest => dest.UnitsInStock, opt => opt.MapFrom(src => (int)src.UnitsInStock))
+                .ForMember(dest => dest.UnitsOnOrder, opt => opt.MapFrom(src => (int)src.UnitsOnOrder))
+                .ForMember(dest => dest.ReorderLevel, opt => opt.MapFrom(src => (int)src.ReorderLevel))
+                .ForMember(dest => dest.UnitPrice, opt => opt.MapFrom(src => src.UnitPrice ?? 0));
 
             CreateMap<CreateProductDto, Product>();
-            CreateMap<UpdateProductDto, Product>();
+            CreateMap<UpdateProductDto, Product>()
+                .ForMember(dest => dest.ProductID, opt => opt.Ignore());
+
             CreateMap<Supplier, SupplierDto>();
             CreateMap<Category, CategoryDto>();
         }

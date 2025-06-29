@@ -1,156 +1,218 @@
-// import { Form, Formik } from 'formik';
-// import * as Yup from 'yup';
-// import { useState } from 'react';
-// import { useProduct } from '../../app/hooks/useProduct';
-// import { useCategories } from '../../app/hooks/useCategories';
-// import { useSuppliers } from '../../app/hooks/useSuppliers';
-// import { useUpdateProduct } from '../../app/hooks/useUpdateProduct';
-// import MyTextInput from '../../app/common/form/TextInput/MyTextInput';
-// import MySelectInput from '../../app/common/form/Select/MySelectInput';
-// import SuccessBanner from '../components/SuccessBanner';
-// import './EditProductForm.css';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { toast } from "react-toastify";
+import { useQuery } from "@tanstack/react-query";
+import agent from "../../app/api/agent";
+import { useCategories } from "../../app/hooks/useCategories";
+import { useSuppliers } from "../../app/hooks/useSuppliers";
+import type { IProductDetailsDto } from "../../app/models/productDetails";
+import type { ICategoryDto } from "../../app/models/categoryDto";
+import type { ISupplierDto } from "../../app/models/supplierDto";
+import MyTextInput from "../../app/common/form/TextInput/MyTextInput";
+import "./EditProductForm.css";
 
-// interface EditProductFormProps {
-//     productId: number;
-//     onSaved?: () => void; // callback after successful save
-// }
+type Props = {
+  productId: number;
+  onClose: () => void;
+};
 
-// export default function EditProductForm({ productId, onSaved }: EditProductFormProps) {
-//     const { data: product, isLoading: loadingProduct, error: productError } = useProduct(productId);
-//     const { data: categories = [], isLoading: loadingCategories } = useCategories();
-//     const { data: suppliers = [], isLoading: loadingSuppliers } = useSuppliers();
+export default function EditProductForm({ productId, onClose }: Props) {
+  const { data: product, isLoading, isError, error } = useQuery({
+    queryKey: ["product", productId],
+    queryFn: () => agent.Products.getById(productId),
+  });
 
-//     // Note: useMutation returns isPending, not isLoading
-//     const { mutateAsync, isPending: isSaving } = useUpdateProduct();
+  const { data: categories } = useCategories();
+  const { data: suppliers } = useSuppliers();
 
-//     const [success, setSuccess] = useState(false);
-//     const [error, setError] = useState('');
+  if (isLoading) return <p className="loading-text">Loading product...</p>;
+  if (isError) return <p className="error-text">Error: {(error as Error).message}</p>;
+  if (!product || !categories || !suppliers) return null;
 
-//     // Prepare dropdown options
-//     const supplierOptions = suppliers.map(s => ({
-//         text: s.companyName,
-//         value: s.supplierId.toString(),
-//     }));
+  // Find category and supplier IDs from names for initial values
+  const categoryObj = categories.find(
+    (cat: ICategoryDto) => cat.categoryName === product.category
+  );
+  const supplierObj = suppliers.find(
+    (sup: ISupplierDto) => sup.companyName === product.supplier
+  );
 
-//     const categoryOptions = categories.map(c => ({
-//         text: c.categoryName,
-//         value: c.categoryId.toString(),
-//     }));
+  const initialValues: IProductDetailsDto = {
+    productID: product.productID,
+    productName: product.productName ?? "",
+    categoryId: categoryObj?.categoryId ?? 0,
+    supplierId: supplierObj?.supplierId ?? 0,
+    quantityPerUnit: product.quantityPerUnit ?? "",
+    unitPrice: product.unitPrice ?? 0,
+    unitsInStock: product.unitsInStock ?? 0,
+    unitsOnOrder: product.unitsOnOrder ?? 0,
+    reorderLevel: product.reorderLevel ?? 0,
+    discontinued: product.discontinued ?? false,
+    category: product.category ?? "",
+    supplier: product.supplier ?? "",
+  };
 
-//     // Confirm before save
-//     const confirmSave = () => window.confirm('Are you sure you want to save changes?');
+  const validate = (values: IProductDetailsDto) => {
+    const errors: Partial<Record<keyof IProductDetailsDto, string>> = {};
+    if (!values.productName.trim()) {
+      errors.productName = "Product Name is required.";
+    }
+    if (!values.categoryId || values.categoryId === 0) {
+      errors.categoryId = "Category is required.";
+    }
+    if (!values.supplierId || values.supplierId === 0) {
+      errors.supplierId = "Supplier is required.";
+    }
+    if (values.unitPrice < 0) {
+      errors.unitPrice = "Unit Price cannot be negative.";
+    }
+    if (values.unitsInStock < 0) {
+      errors.unitsInStock = "Units In Stock cannot be negative.";
+    }
+    if (values.unitsOnOrder < 0) {
+      errors.unitsOnOrder = "Units On Order cannot be negative.";
+    }
+    if (values.reorderLevel < 0) {
+      errors.reorderLevel = "Reorder Level cannot be negative.";
+    }
+    return errors;
+  };
 
-//     if (loadingProduct) return <p>Loading product details...</p>;
-//     if (productError) return <p>Error loading product: {productError.message}</p>;
-//     if (!product) return <p>Product not found</p>;
+  const handleSubmit = async (values: IProductDetailsDto) => {
+    if (!window.confirm("Are you sure you want to update this product?")) return;
 
-//     return (
-//         <div className="form-wrapper">
-//             <h2>Edit Product - ID {productId}</h2>
+    try {
+      await agent.Products.update(productId, {
+        productName: values.productName,
+        supplierId: Number(values.supplierId),
+        categoryId: Number(values.categoryId),
+        quantityPerUnit: values.quantityPerUnit,
+        unitPrice: Number(values.unitPrice),
+        unitsInStock: Number(values.unitsInStock),
+        unitsOnOrder: Number(values.unitsOnOrder),
+        reorderLevel: Number(values.reorderLevel),
+        discontinued: values.discontinued,
+      });
+      toast.success("Product updated successfully");
+      onClose();
+    } catch (err) {
+      toast.error("Failed to update product");
+      console.error(err);
+    }
+  };
 
-//             {success && (
-//                 <SuccessBanner
-//                     message="Product updated successfully!"
-//                     onClose={() => setSuccess(false)}
-//                 />
-//             )}
-//             {error && <div className="error-banner">{error}</div>}
+  return (
+    <div className="edit-product-form">
+      <h2 className="form-title">Edit Product</h2>
+      <p className="product-id">
+        <strong>Product ID:</strong> {product.productID}
+      </p>
 
-//             <Formik
-//                 initialValues={{
-//                     productName: product.productName ?? '',
-//                     supplierId: product.supplierId?.toString() ?? '',
-//                     categoryId: product.categoryId?.toString() ?? '',
-//                     quantityPerUnit: product.quantityPerUnit ?? '',
-//                     unitPrice: product.unitPrice ?? 0,
-//                     unitsInStock: product.unitsInStock ?? 0,
-//                     unitsOnOrder: product.unitsOnOrder ?? 0,
-//                     reorderLevel: product.reorderLevel ?? 0,
-//                     discontinued: product.discontinued ?? false,
-//                 }}
-//                 validationSchema={Yup.object({
-//                     productName: Yup.string().required('Required'),
-//                     supplierId: Yup.string().required('Required'),
-//                     categoryId: Yup.string().required('Required'),
-//                     quantityPerUnit: Yup.string().required('Required'),
-//                     unitPrice: Yup.number().required('Required').positive('Must be positive'),
-//                     unitsInStock: Yup.number().required('Required').min(0, 'Cannot be negative'),
-//                     unitsOnOrder: Yup.number().min(0, 'Cannot be negative'),
-//                     reorderLevel: Yup.number().min(0, 'Cannot be negative'),
-//                     discontinued: Yup.boolean(),
-//                 })}
-//                 onSubmit={async (values, { setSubmitting }) => {
-//                     setError('');
-//                     if (!confirmSave()) {
-//                         setSubmitting(false);
-//                         return;
-//                     }
-//                     try {
-//                         await mutateAsync({
-//                             id: productId,
-//                             product: {
-//                                 productName: values.productName,
-//                                 supplierId: parseInt(values.supplierId),
-//                                 categoryId: parseInt(values.categoryId),
-//                                 quantityPerUnit: values.quantityPerUnit,
-//                                 unitPrice: values.unitPrice,
-//                                 unitsInStock: values.unitsInStock,
-//                                 unitsOnOrder: values.unitsOnOrder,
-//                                 reorderLevel: values.reorderLevel,
-//                                 discontinued: values.discontinued,
-//                             }
-//                         });
-//                         setSuccess(true);
-//                         if (onSaved) onSaved();
-//                     } catch {
-//                         setError('Something went wrong while updating the product.');
-//                     } finally {
-//                         setSubmitting(false);
-//                     }
-//                 }}
-//             >
-//                 {({ isSubmitting, values, setFieldValue }) => (
-//                     <Form className="product-form">
-//                         <div><strong>Product ID: {productId}</strong></div>
+      <Formik
+        initialValues={initialValues}
+        validate={validate}
+        onSubmit={handleSubmit}
+        enableReinitialize // important to update when product loads
+      >
+        {({ isSubmitting }) => (
+          <Form noValidate>
+            <MyTextInput
+              label="Product Name"
+              name="productName"
+              placeholder="Enter product name"
+            />
 
-//                         <MyTextInput name="productName" placeholder="Enter name" label="Product Name" />
+            <div className="form-group">
+              <label htmlFor="categoryId">Category<span className="required">*</span></label>
+              <Field
+                as="select"
+                id="categoryId"
+                name="categoryId"
+                className="custom-input"
+              >
+                <option value={0}>-- Select Category --</option>
+                {categories.map((cat) => (
+                  <option key={cat.categoryId} value={cat.categoryId}>
+                    {cat.categoryName}
+                  </option>
+                ))}
+              </Field>
+              <ErrorMessage name="categoryId" component="div" className="error-label" />
+            </div>
 
-//                         <MySelectInput
-//                             name="supplierId"
-//                             placeholder={loadingSuppliers ? 'Loading suppliers...' : 'Select supplier'}
-//                             label="Supplier"
-//                             options={supplierOptions}
-//                         />
+            <div className="form-group">
+              <label htmlFor="supplierId">Supplier<span className="required">*</span></label>
+              <Field
+                as="select"
+                id="supplierId"
+                name="supplierId"
+                className="custom-input"
+              >
+                <option value={0}>-- Select Supplier --</option>
+                {suppliers.map((sup) => (
+                  <option key={sup.supplierId} value={sup.supplierId}>
+                    {sup.companyName}
+                  </option>
+                ))}
+              </Field>
+              <ErrorMessage name="supplierId" component="div" className="error-label" />
+            </div>
 
-//                         <MySelectInput
-//                             name="categoryId"
-//                             placeholder={loadingCategories ? 'Loading categories...' : 'Select category'}
-//                             label="Category"
-//                             options={categoryOptions}
-//                         />
+            <MyTextInput
+              label="Quantity Per Unit"
+              name="quantityPerUnit"
+              placeholder="e.g., 10 boxes x 20 bags"
+            />
 
-//                         <MyTextInput name="quantityPerUnit" placeholder="e.g. 6 bottles" label="Quantity Per Unit" />
-//                         <MyTextInput name="unitPrice" placeholder="e.g. 12.5" label="Unit Price" type="number" />
-//                         <MyTextInput name="unitsInStock" placeholder="e.g. 100" label="Units in Stock" type="number" />
-//                         <MyTextInput name="unitsOnOrder" placeholder="e.g. 0" label="Units On Order" type="number" />
-//                         <MyTextInput name="reorderLevel" placeholder="e.g. 0" label="Reorder Level" type="number" />
+            <MyTextInput
+              label="Unit Price"
+              name="unitPrice"
+              type="number"
+              placeholder="Unit price"
+            />
 
-//                         <label className="checkbox-label">
-//                             <input
-//                                 type="checkbox"
-//                                 name="discontinued"
-//                                 checked={values.discontinued}
-//                                 onChange={() => setFieldValue('discontinued', !values.discontinued)}
-//                             />
-//                             Discontinued
-//                         </label>
+            <MyTextInput
+              label="Units In Stock"
+              name="unitsInStock"
+              type="number"
+              placeholder="Units in stock"
+            />
 
-//                         <button type="submit" disabled={isSubmitting || isSaving} className="submit-btn">
-//                             {isSubmitting || isSaving ? 'Saving...' : 'Save Changes'}
-//                         </button>
-//                     </Form>
-//                 )}
-//             </Formik>
-//         </div>
-//     );
-// }
+            <MyTextInput
+              label="Units On Order"
+              name="unitsOnOrder"
+              type="number"
+              placeholder="Units on order"
+            />
+
+            <MyTextInput
+              label="Reorder Level"
+              name="reorderLevel"
+              type="number"
+              placeholder="Reorder level"
+            />
+
+            <div className="form-group checkbox-group">
+              <label className="checkbox-label" htmlFor="discontinued">
+                <Field
+                  type="checkbox"
+                  id="discontinued"
+                  name="discontinued"
+                />
+                Discontinued
+              </label>
+            </div>
+
+            <div className="button-group">
+              <button type="submit" className="btn-primary" disabled={isSubmitting}>
+                Save Changes
+              </button>
+              <button type="button" className="btn-secondary" onClick={onClose}>
+                Cancel
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </div>
+  );
+}
