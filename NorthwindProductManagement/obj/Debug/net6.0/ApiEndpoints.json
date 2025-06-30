@@ -20,6 +20,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "NorthwindProductManagement.Controllers.CustomersController",
+    "Method": "GetCustomerOrderHistory",
+    "RelativePath": "api/Customers/orders-history",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "customerId",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "NorthwindProductManagement.Controllers.ProductsController",
     "Method": "GetAll",
     "RelativePath": "api/Products",

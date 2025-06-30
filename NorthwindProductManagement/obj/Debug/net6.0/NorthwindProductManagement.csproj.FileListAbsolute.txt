@@ -115,7 +115,6 @@ C:\Users\jonat\source\repos\NorthwindProductManagement\NorthwindProductManagemen
 C:\Users\jonat\source\repos\NorthwindProductManagement\NorthwindProductManagement\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.NorthwindProductManagement.props
 C:\Users\jonat\source\repos\NorthwindProductManagement\NorthwindProductManagement\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.NorthwindProductManagement.props
 C:\Users\jonat\source\repos\NorthwindProductManagement\NorthwindProductManagement\obj\Debug\net6.0\staticwebassets.pack.json
-C:\Users\jonat\source\repos\NorthwindProductManagement\NorthwindProductManagement\obj\Debug\net6.0\staticwebassets.upToDateCheck.txt
 C:\Users\jonat\source\repos\NorthwindProductManagement\NorthwindProductManagement\obj\Debug\net6.0\Northwin.1A366FF4.Up2Date
 C:\Users\jonat\source\repos\NorthwindProductManagement\NorthwindProductManagement\obj\Debug\net6.0\NorthwindProductManagement.dll
 C:\Users\jonat\source\repos\NorthwindProductManagement\NorthwindProductManagement\obj\Debug\net6.0\refint\NorthwindProductManagement.dll
