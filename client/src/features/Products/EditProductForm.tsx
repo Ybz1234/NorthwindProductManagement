@@ -4,11 +4,10 @@ import * as Yup from "yup";
 import GenericForm from "../components/GenericForm";
 import type { Option, FieldConfig } from "../components/GenericForm";
 import agent from "../../app/api/agent";
-import { useCategories } from "../../app/hooks/useCategories";
-import { useSuppliers } from "../../app/hooks/useSuppliers";
 import type { IProductDetailsDto } from "../../app/models/productDetails";
 import type { ICategoryDto } from "../../app/models/categoryDto";
 import type { ISupplierDto } from "../../app/models/supplierDto";
+import { useStore } from "../../app/stores/store";
 
 type Props = {
   productId: number;
@@ -21,8 +20,7 @@ export default function EditProductForm({ productId, onClose }: Props) {
     queryFn: () => agent.Products.getById(productId),
   });
 
-  const { data: categories } = useCategories();
-  const { data: suppliers } = useSuppliers();
+  const { commonStore: { categories, suppliers } } = useStore();
 
   if (isLoading) return <p className="loading-text">Loading product...</p>;
   if (isError) return <p className="error-text">Error: {(error as Error).message}</p>;

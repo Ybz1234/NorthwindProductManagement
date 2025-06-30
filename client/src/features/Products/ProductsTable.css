@@ -220,3 +220,26 @@
 .btn-cancel:hover:not(:disabled) {
   background-color: var(--border-color);
 }
+
+.search-input {
+  padding: 10px 14px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  width: 100%;
+  max-width: 400px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.search-input::placeholder {
+  color: var(--text-color);
+  opacity: 0.6;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--link-color);
+  box-shadow: 0 0 0 2px rgba(77, 134, 255, 0.25);
+}

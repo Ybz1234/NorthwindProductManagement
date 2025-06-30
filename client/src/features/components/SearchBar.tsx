@@ -1,27 +1,18 @@
-import { useState } from "react";
-
-type Props = {
+interface SearchBarProps {
     placeholder?: string;
+    value?: string;
     onSearch: (query: string) => void;
-};
+}
 
-export default function SearchBar({ placeholder = "Search...", onSearch }: Props) {
-    const [query, setQuery] = useState("");
-
-    const handleChange = (value: string) => {
-        setQuery(value);
-        onSearch(value);
-    };
-
+export default function SearchBar({ placeholder, value = '', onSearch }: SearchBarProps) {
     return (
-        <div style={{ marginBottom: "1rem" }}>
-            <input
-                type="text"
-                value={query}
-                onChange={(e) => handleChange(e.target.value)}
-                placeholder={placeholder}
-                className="search-input"
-            />
-        </div>
+        <input
+            type="text"
+            className="search-input"
+            placeholder={placeholder}
+            value={value}
+            onChange={(e) => onSearch(e.target.value)}
+            autoComplete="off"
+        />
     );
 }

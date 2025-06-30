@@ -8,7 +8,6 @@ import ProductListPage from "../../features/pages/ProductListPage";
 import ProductsTablePage from "../../features/pages/ProductsTablePage";
 import CreateProductPage from "../../features/pages/CreateProductPage";
 import EditProductPage from "../../features/pages/EditProductPage";
-import DeleteProductPage from "../../features/pages/DeleteProductPage";
 
 export const routes: RouteObject[] = [
   {
@@ -21,7 +20,6 @@ export const routes: RouteObject[] = [
       { path: "products/table", element: <ProductsTablePage /> },
       { path: "products/create", element: <CreateProductPage /> },
       { path: "products/edit/:id", element: <EditProductPage /> },
-      { path: "products/delete/:id", element: <DeleteProductPage /> },
       { path: "server-error", element: <ServerError /> },
       { path: "not-found", element: <NotFound /> },
       { path: "*", element: <Navigate replace to="/not-found" /> }

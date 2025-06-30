@@ -1,11 +1,39 @@
-import { observer } from "mobx-react-lite"
-import ActionsTable from "../Home/ActionsTable"
+import { observer } from "mobx-react-lite";
+import Header from "../Home/Header";
+import ActionsCard from "../Home/ActionsCard";
 
 export default observer(function HomePage() {
   return (
-    <>
-      <h1 style={{ textAlign: 'center', marginBottom: '2rem', color: '#007acc' }}>Welcome to Northwind Product Management</h1>
-      <ActionsTable />
-    </>
+    <div
+      style={{
+        minHeight: "100vh",
+        padding: "2rem",
+        fontFamily: "Segoe UI, Roboto, sans-serif",
+        color: "var(--text-color)",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "900px",
+          margin: "0 auto",
+          backgroundColor: "var(--card-bg)",
+          borderRadius: "16px",
+          boxShadow: "0 6px 20px rgba(0, 0, 0, 0.1)",
+          padding: "2.5rem",
+          textAlign: "center",
+          animation: "fadeIn 1s ease-in-out",
+          border: "1px solid var(--border-color)",
+        }}
+      >
+        <Header />
+        <hr
+          style={{
+            margin: "2rem 0",
+            borderTop: "2px dashed var(--border-color)",
+          }}
+        />
+        <ActionsCard />
+      </div>
+    </div>
   );
 });

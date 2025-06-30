@@ -1,17 +1,15 @@
 import * as Yup from "yup";
 import { useState } from "react";
 import { useCreateProduct } from "../../app/hooks/useCreateProduct";
-import { useCategories } from "../../app/hooks/useCategories";
-import { useSuppliers } from "../../app/hooks/useSuppliers";
 import GenericForm from "../components/GenericForm";
 import type { Option, FieldConfig } from "../components/GenericForm";
+import { useStore } from "../../app/stores/store";
 
 export default function CreateProductForm() {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
     const { mutateAsync, isPending } = useCreateProduct();
-    const { data: categories = [], isLoading: loadingCategories } = useCategories();
-    const { data: suppliers = [], isLoading: loadingSuppliers } = useSuppliers();
+    const { commonStore: { categories, suppliers, loadingInitial } } = useStore();
 
     const categoryOptions: Option[] = categories.map((c) => ({
         text: c.categoryName,
@@ -47,14 +45,14 @@ export default function CreateProductForm() {
             name: "supplierId",
             label: "Supplier",
             type: "select",
-            placeholder: loadingSuppliers ? "Loading suppliers..." : "Select supplier",
+            placeholder: loadingInitial ? "Loading suppliers..." : "Select supplier",
             options: supplierOptions,
         },
         {
             name: "categoryId",
             label: "Category",
             type: "select",
-            placeholder: loadingCategories ? "Loading categories..." : "Select category",
+            placeholder: loadingInitial ? "Loading categories..." : "Select category",
             options: categoryOptions,
         },
         { name: "quantityPerUnit", label: "Quantity Per Unit", placeholder: "e.g. 6 bottles" },
