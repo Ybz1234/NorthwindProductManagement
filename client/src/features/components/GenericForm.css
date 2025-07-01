@@ -177,5 +177,5 @@ button {
 
 .error-banner {
   background-color: #dc3545;
-  box-shadow: 0 2px 6px rgba(220, 53, 69, 0.3);
+  box-shadow: 0 2px 6px a(220, 53, 69, 0.3);
 }

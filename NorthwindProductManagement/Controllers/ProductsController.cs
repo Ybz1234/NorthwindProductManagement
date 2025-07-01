@@ -19,6 +19,12 @@ namespace NorthwindProductManagement.Controllers
             return Ok(await Mediator.Send(new List.Query()));
         }
 
+        [HttpGet("top-expensive")]
+        public async Task<IActionResult> GetTenMostExpensiveProducts()
+        {
+            return Ok(await Mediator.Send(new TenMostExpensiveProducts.Query()));
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateProduct(CreateProductDto dto)
         {
@@ -35,6 +41,12 @@ namespace NorthwindProductManagement.Controllers
         public async Task<IActionResult> DeleteProduct(int id)
         {
             return Ok(await Mediator.Send(new Delete.Command { Id = id }));
+        }
+
+        [HttpGet("export-csv")]
+        public async Task<IActionResult> ExportCsv()
+        {
+            return await Mediator.Send(new ExportCsv.Query());
         }
     }
 }

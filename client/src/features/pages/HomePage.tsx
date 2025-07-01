@@ -1,6 +1,7 @@
 import { observer } from "mobx-react-lite";
 import Header from "../Home/Header";
 import ActionsCard from "../Home/ActionsCard";
+import TopExpensiveProductsChart from "../Products/TopExpensiveProductsChart";
 
 export default observer(function HomePage() {
   return (
@@ -33,6 +34,10 @@ export default observer(function HomePage() {
           }}
         />
         <ActionsCard />
+
+        <div style={{ marginTop: "3rem" }}>
+          <TopExpensiveProductsChart />
+        </div>
       </div>
     </div>
   );

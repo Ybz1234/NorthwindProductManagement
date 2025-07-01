@@ -2,6 +2,7 @@ import { makeAutoObservable, reaction, runInAction } from "mobx";
 import agent from "../api/agent";
 import type { ISupplierDto } from "../models/supplierDto";
 import type { ICategoryDto } from "../models/categoryDto";
+import type { IExpensiveProductDto } from "../models/IExpensiveProductDto ";
 
 interface ServerError {
     message: string;
@@ -15,6 +16,7 @@ export default class CommonStore {
     loadingInitial = false;
     suppliers: ISupplierDto[] = [];
     categories: ICategoryDto[] = [];
+    topExpensiveProducts: IExpensiveProductDto[] = [];
 
     constructor() {
         makeAutoObservable(this);
@@ -54,6 +56,22 @@ export default class CommonStore {
             });
         } catch (error) {
             console.error("Failed to load categories", error);
+            runInAction(() => {
+                this.loadingInitial = false;
+            });
+        }
+    };
+
+    loadTopExpensiveProducts = async () => {
+        this.loadingInitial = true;
+        try {
+            const products = await agent.Products.getTopExpensive();
+            runInAction(() => {
+                this.topExpensiveProducts = products ?? [];
+                this.loadingInitial = false;
+            });
+        } catch (error) {
+            console.error("Failed to load most expensive products", error);
             runInAction(() => {
                 this.loadingInitial = false;
             });

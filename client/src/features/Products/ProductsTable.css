@@ -35,144 +35,32 @@
 }
 
 .search-input {
-  padding: 8px 12px;
+  padding: 10px 14px;
   font-size: 16px;
-  border-radius: 4px;
+  border-radius: 6px;
   border: 1px solid var(--border-color);
+  background-color: var(--card-bg);
+  color: var(--text-color);
   width: 100%;
   max-width: 400px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.search-input::placeholder {
+  color: var(--text-color);
+  opacity: 0.6;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--link-color);
+  box-shadow: 0 0 0 2px rgba(77, 134, 255, 0.25);
 }
 
 .actions-cell {
   display: flex;
   justify-content: center;
   gap: 8px;
-}
-
-.btn {
-  border-radius: 4px;
-  padding: 6px 14px;
-  cursor: pointer;
-  font-weight: 600;
-  border: 1.5px solid transparent;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-}
-
-.btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.btn-edit {
-  background-color: rgb(77, 134, 255);
-  border-color: rgb(20, 94, 255);
-  color: white;
-}
-
-.btn-edit:hover:not(:disabled) {
-  background-color: rgb(47, 94, 255);
-  border-color: rgb(0, 60, 255);
-}
-
-.btn-delete {
-  background-color: rgb(255, 77, 77);
-  border-color: rgb(220, 20, 60);
-  color: white;
-}
-
-.btn-delete:hover:not(:disabled) {
-  background-color: rgb(220, 30, 30);
-  border-color: rgb(180, 10, 10);
-}
-
-.btn-cancel {
-  background-color: #eee;
-  border-color: #ccc;
-  color: #555;
-}
-
-.btn-cancel:hover:not(:disabled) {
-  background-color: #ddd;
-}
-
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal {
-  background: white;
-  padding: 2rem 2.5rem;
-  border-radius: 8px;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: 0 8px 24px rgb(0 0 0 / 0.15);
-  text-align: center;
-}
-
-.modal h3 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  color: #222;
-}
-
-.modal p {
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  color: #444;
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
-
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(0, 0, 0, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal {
-  background-color: var(--card-bg);
-  color: var(--text-color);
-  padding: 2rem 2.5rem;
-  border-radius: 8px;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: 0 8px 24px rgb(0 0 0 / 0.15);
-  text-align: center;
-  border: 1px solid var(--border-color);
-}
-
-.modal h3 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  color: var(--text-color);
-}
-
-.modal p {
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  color: var(--text-color);
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
 }
 
 .btn {
@@ -190,14 +78,14 @@
 }
 
 .btn-edit {
-  background-color: #4d86ff;
-  border-color: #145eff;
+  background-color: orange;
+  border-color: darkorange;
   color: white;
 }
 
 .btn-edit:hover:not(:disabled) {
-  background-color: #2f5eff;
-  border-color: #003cff;
+  background-color: darkorange;
+  border-color: orangered;
 }
 
 .btn-delete {
@@ -221,25 +109,126 @@
   background-color: var(--border-color);
 }
 
-.search-input {
-  padding: 10px 14px;
-  font-size: 16px;
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
   background-color: var(--card-bg);
   color: var(--text-color);
-  width: 100%;
+  padding: 2rem 2.5rem;
+  border-radius: 8px;
   max-width: 400px;
-  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  width: 90%;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.15);
+  text-align: center;
+  border: 1px solid var(--border-color);
 }
 
-.search-input::placeholder {
+.modal h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
   color: var(--text-color);
-  opacity: 0.6;
 }
 
-.search-input:focus {
-  outline: none;
-  border-color: var(--link-color);
-  box-shadow: 0 0 0 2px rgba(77, 134, 255, 0.25);
+.modal p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: var(--text-color);
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.export-btn {
+  padding: 6px 14px;
+  font-size: 14px;
+  border: 1px solid var(--link-color);
+  border-radius: 4px;
+  background-color: var(--link-color);
+  color: var(--bg-color);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.export-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.export-btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+[data-theme="dark"] .products-table thead {
+  background-color: #cc5500;
+}
+
+[data-theme="dark"] .products-table th {
+  color: var(--bg-color);
+}
+
+[data-theme="dark"] .export-btn {
+  background-color: #cc5500;
+  border-color: #cc5500;
+  color: var(--bg-color);
+}
+
+[data-theme="dark"] .export-btn:hover:not(:disabled) {
+  background-color: #b34700; 
+  border-color: #993d00;
+}
+
+.create-btn {
+  padding: 6px 14px;
+  font-size: 14px;
+  border: 1px solid #28a745;
+  border-radius: 4px;
+  background-color: #28a745;
+  color: var(--bg-color);
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+}
+
+.create-btn:hover:not(:disabled) {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.create-btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+[data-theme="dark"] .create-btn {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: var(--bg-color);
+}
+
+[data-theme="dark"] .create-btn:hover:not(:disabled) {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+[data-theme="dark"] .btn-edit,
+[data-theme="dark"] .btn-delete {
+  color: black;
+}
+
+[data-theme="dark"] .btn-edit:hover:not(:disabled),
+[data-theme="dark"] .btn-delete:hover:not(:disabled) {
+  color: black;
 }

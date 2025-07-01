@@ -39,7 +39,7 @@ export default observer(function ProductsTable() {
       await agent.Products.delete(productToDelete.productID);
       toast.success(`Deleted product: ${productToDelete.productName}`);
       setProductToDelete(null);
-      window.location.reload(); // ideally: refetch instead
+      window.location.reload();
     } catch (error: any) {
       const backendMsg = error?.response?.data?.message;
       if (backendMsg?.toLowerCase().includes("referenced by existing orders")) {
@@ -70,7 +70,9 @@ export default observer(function ProductsTable() {
 
   return (
     <div className="products-table-container">
-      <ProductsTableHeader searchQuery={searchQuery} onSearch={setSearchQuery} />
+      <div style={{ marginBottom: "1rem" }}>
+        <ProductsTableHeader searchQuery={searchQuery} onSearch={setSearchQuery} />
+      </div>
       <ProductsTableBody products={paged} onDelete={setProductToDelete} />
       <PaginationControls
         currentPage={currentPage}

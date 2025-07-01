@@ -122,3 +122,4 @@ C:\Users\jonat\source\repos\NorthwindProductManagement\NorthwindProductManagemen
 C:\Users\jonat\source\repos\NorthwindProductManagement\NorthwindProductManagement\obj\Debug\net6.0\NorthwindProductManagement.genruntimeconfig.cache
 C:\Users\jonat\source\repos\NorthwindProductManagement\NorthwindProductManagement\obj\Debug\net6.0\ref\NorthwindProductManagement.dll
 C:\Users\jonat\source\repos\NorthwindProductManagement\NorthwindProductManagement\obj\Debug\net6.0\NorthwindProductManagement.sourcelink.json
+C:\Users\jonat\source\repos\NorthwindProductManagement\NorthwindProductManagement\obj\Debug\net6.0\staticwebassets.upToDateCheck.txt

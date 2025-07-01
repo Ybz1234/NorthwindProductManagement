@@ -11,14 +11,14 @@ export type FieldConfig =
         label: string;
         type?: "text" | "number" | "checkbox" | "select";
         placeholder?: string;
-        options?: Option[]; // only for select
+        options?: Option[];
         className?: string;
     };
 
 export type GenericFormProps<T extends FormikValues> = {
     title: string;
     initialValues: T;
-    validationSchema?: any; // Yup schema or validate func
+    validationSchema?: any;
     onSubmit: (values: T, formikHelpers: FormikHelpers<T>) => void | Promise<void>;
     fields: FieldConfig[];
     isSubmitting?: boolean;

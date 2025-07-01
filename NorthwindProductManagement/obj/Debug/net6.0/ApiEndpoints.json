@@ -36,6 +36,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "NorthwindProductManagement.Controllers.EmployeesController",
+    "Method": "GetEmployeeSalesByCountry",
+    "RelativePath": "api/Employees/sales-by-country",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "beginningDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "endingDate",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "NorthwindProductManagement.Controllers.ProductsController",
     "Method": "GetAll",
     "RelativePath": "api/Products",
@@ -112,6 +133,26 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NorthwindProductManagement.Controllers.ProductsController",
+    "Method": "ExportCsv",
+    "RelativePath": "api/Products/export-csv",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NorthwindProductManagement.Controllers.ProductsController",
+    "Method": "GetTenMostExpensiveProducts",
+    "RelativePath": "api/Products/top-expensive",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

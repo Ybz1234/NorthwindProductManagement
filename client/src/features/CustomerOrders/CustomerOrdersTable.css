@@ -120,11 +120,67 @@
 }
 
 .pagination-controls button:disabled {
-    background-color: #aaa; /* you can also convert this to a variable if you want */
+    background-color: #aaa;
     cursor: not-allowed;
 }
 
 .pagination-controls span {
     font-weight: bold;
     color: var(--text-color);
+}
+
+[data-theme="dark"] .pagination-controls {
+  background: #1e1e1e;
+  border-top: 1px solid #333;
+  color: #eee;
+}
+
+[data-theme="dark"] .pagination-controls button {
+  background-color: #cc5500;
+  border-color: #cc5500;
+  color: var(--bg-color);
+}
+
+[data-theme="dark"] .pagination-controls button:hover:not(:disabled) {
+  background-color: #b34700;
+  border-color: #993d00;
+}
+
+[data-theme="dark"] .pagination-controls button:disabled {
+  background-color: #555;
+  border-color: #555;
+  color: #999;
+}
+
+[data-theme="dark"] .pagination-controls span {
+  color: #eee;
+}
+
+/* Dark mode override for summary section */
+[data-theme="dark"] .summary-box {
+  background-color: #1e1e1e;
+  border-color: #333;
+  color: #eee;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .summary-box h2 {
+  color: #eee;
+}
+
+[data-theme="dark"] .summary-card {
+  background-color: #2a2a2a;
+  border-color: #444;
+  color: #eee;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .summary-card h3,
+[data-theme="dark"] .summary-card p {
+  color: #eee;
+}
+
+[data-theme="dark"] .summary-card .rank {
+  background-color: #cc5500;
+  color: var(--bg-color);
 }

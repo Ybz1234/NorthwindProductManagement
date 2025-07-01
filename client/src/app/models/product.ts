@@ -5,4 +5,5 @@ export interface IProduct {
     supplier: string;
     unitPrice: number;
     units: number;
+    hasOrders: boolean;
 }

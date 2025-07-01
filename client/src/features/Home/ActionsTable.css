@@ -7,6 +7,7 @@
   overflow-x: auto;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
 
 .actions-table {
@@ -21,6 +22,7 @@
   border-bottom: 1px solid var(--border-color);
   font-size: 1rem;
   color: var(--text-color);
+  transition: color 0.3s;
 }
 
 .actions-table thead {
@@ -33,6 +35,7 @@
 
 .actions-table tbody tr:hover {
   background-color: var(--border-color);
+  transition: background-color 0.3s;
 }
 
 .actions-col {
@@ -48,7 +51,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .navigate-btn:hover {
@@ -77,4 +80,65 @@
   background-color: #005f99; /* Also could be a variable */
   box-shadow: 0 0 8px rgba(0, 122, 204, 0.7);
   outline: none;
+}
+
+/* Dark mode overrides */
+[data-theme="dark"] .actions-table-container {
+  box-shadow: 0 4px 12px rgba(255 255 255 / 0.1);
+  background-color: var(--card-bg); /* ensure var is for dark mode */
+  color: var(--text-color); /* ensure var is for dark mode */
+}
+
+[data-theme="dark"] .actions-table th,
+[data-theme="dark"] .actions-table td {
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .actions-table thead {
+  background-color: var(--link-color);
+}
+
+[data-theme="dark"] .actions-table tbody tr:hover {
+  background-color: var(--border-color);
+}
+
+[data-theme="dark"] .navigate-btn {
+  background: linear-gradient(to right, red, orange);
+  color: var(--bg-color);
+}
+
+[data-theme="dark"] .navigate-btn:hover {
+  background-color: #cc5500;
+  box-shadow: 0 2px 6px rgba(255 140 0, 0.5);
+}
+
+[data-theme="dark"] .go-button {
+  background: #cc5500;
+  color: var(--bg-color);
+}
+
+[data-theme="dark"] .go-button:hover,
+[data-theme="dark"] .go-button:focus {
+  background-color: #cc5500;
+  box-shadow: 0 0 8px rgba(255, 140, 0, 0.7);
+}
+
+.actions-table thead {
+  background-color: var(--link-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.actions-table th {
+  color: var(--bg-color);
+  transition: color 0.3s;
+}
+
+/* Dark mode overrides for header */
+[data-theme="dark"] .actions-table thead {
+  background-color: #cc5500; /* Or use a suitable dark mode variable */
+}
+
+[data-theme="dark"] .actions-table th {
+  color: var(--bg-color); /* Usually light text color */
 }

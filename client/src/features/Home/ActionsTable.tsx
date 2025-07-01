@@ -5,8 +5,7 @@ import { Table, type Column } from "../components/Table";
 
 const actions = [
   { name: "Customer orders", url: "/products/list" },
-  { name: "Products table", url: "/products/table" },
-  { name: "Create New Product", url: "/products/create" },
+  { name: "Products table", url: "/products/table" }
 ];
 
 const columns: Column<typeof actions[0]>[] = [

@@ -9,6 +9,7 @@ import type { ISupplierDto } from "../models/supplierDto";
 import type { ICategoryDto } from "../models/categoryDto";
 import type { IProductDetailsDto } from "../models/productDetails";
 import type { ICreateProductDto } from "../models/createProductDto";
+import type { IExpensiveProductDto } from "../models/IExpensiveProductDto ";
 
 
 const sleep = (delay: number) => {
@@ -90,9 +91,11 @@ const Customers = {
 const Products = {
     create: (dto: ICreateProductDto) => requests.post<void>('/Products', dto),
     getAll: () => requests.get<IProduct[]>('/Products'),
+    getTopExpensive: () => requests.get<IExpensiveProductDto[]>('/Products/top-expensive'),
     getById: (id: number) => requestsArray.get<IProductDetailsDto>(`/Products/${id}`),
     update: (id: number, dto: Partial<IProductDetailsDto>) => requests.put<void>(`/Products/${id}`, dto),
     delete: (id: number) => requests.del<void>(`/Products/${id}`),
+    exportCsv: () => axios.get('/Products/export-csv', { responseType: 'blob' }),
 };
 
 const Suppliers = {

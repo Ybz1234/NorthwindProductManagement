@@ -26,31 +26,18 @@ namespace NorthwindProductManagement.Queries.Products
             {
                 _logger.LogInformation("Attempting to delete product with ID {Id}", request.Id);
 
-                var product = await _context.Products.FindAsync(new object[] { request.Id }, cancellationToken);
+                var product = await _context.Products
+                    .Include(p => p.OrderDetails)
+                    .FirstOrDefaultAsync(p => p.ProductID == request.Id, cancellationToken);
+                    
                 if (product == null)
                 {
                     _logger.LogWarning("Product with ID {Id} not found", request.Id);
-                    throw new Exception("Product not found");
-                }
-
-                // Check if any order details reference this product
-                bool isReferenced = await _context.OrderDetails
-                    .AnyAsync(od => od.ProductID == request.Id, cancellationToken);
-
-                if (isReferenced)
-                {
-                    _logger.LogWarning("Cannot delete product with ID {Id} because it is referenced by existing orders", request.Id);
-                    throw new Exception("Cannot delete product because it is referenced by existing orders.");
+                    return Unit.Value;
                 }
 
                 _context.Products.Remove(product);
-                var result = await _context.SaveChangesAsync(cancellationToken);
-
-                if (result <= 0)
-                {
-                    _logger.LogWarning("Failed to delete product with ID {Id}", request.Id);
-                    throw new Exception("Problem deleting product");
-                }
+                await _context.SaveChangesAsync(cancellationToken);
 
                 _logger.LogInformation("Product with ID {Id} deleted successfully", request.Id);
                 return Unit.Value;
