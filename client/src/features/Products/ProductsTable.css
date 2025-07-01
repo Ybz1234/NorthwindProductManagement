@@ -8,6 +8,7 @@
 .products-table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed; /* Added to fix column widths and prevent shifting */
 }
 
 .products-table th,
@@ -15,6 +16,11 @@
   padding: 1rem 1.5rem;
   text-align: left;
   border-bottom: 1px solid var(--border-color);
+
+  white-space: nowrap;       /* Prevent text wrap */
+  overflow: hidden;          /* Hide overflow */
+  text-overflow: ellipsis;   /* Show ... for overflow */
+  max-width: 200px;          /* Set max width to keep columns stable */
 }
 
 .products-table thead {
@@ -212,6 +218,7 @@
   background-color: #aaa;
   cursor: not-allowed;
 }
+
 [data-theme="dark"] .create-btn {
   background-color: #28a745;
   border-color: #28a745;

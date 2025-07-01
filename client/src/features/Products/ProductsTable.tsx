@@ -67,6 +67,7 @@ export default observer(function ProductsTable() {
   const startIndex = (currentPage - 1) * pageSize;
   const paged = filteredProducts.slice(startIndex, startIndex + pageSize);
   const totalPages = Math.ceil(filteredProducts.length / pageSize);
+console.log(paged);
 
   return (
     <div className="products-table-container">

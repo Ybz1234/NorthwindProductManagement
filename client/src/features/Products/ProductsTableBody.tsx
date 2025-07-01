@@ -15,7 +15,7 @@ export default function ProductsTableBody({ products, onDelete }: Props) {
         { header: "Category", accessor: "category", width: "15%" },
         { header: "Supplier", accessor: "supplier", width: "15%" },
         { header: "Unit Price", accessor: "unitPrice", width: "15%", align: "right" },
-        { header: "Units", accessor: "units", width: "15%", align: "right" },
+        { header: "Units", accessor: "unitsInStock", width: "15%", align: "right" },
         {
             header: "Actions",
             accessor: (row) => (

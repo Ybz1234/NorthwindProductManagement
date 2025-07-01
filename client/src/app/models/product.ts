@@ -4,6 +4,6 @@ export interface IProduct {
     category: string;
     supplier: string;
     unitPrice: number;
-    units: number;
+    unitsInStock: number;
     hasOrders: boolean;
 }
