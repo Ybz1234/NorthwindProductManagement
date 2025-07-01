@@ -32,9 +32,9 @@ git clone https://github.com/Ybz1234/NorthwindProductManagement.git
 cd NorthwindProductManagement
 
 Server: dotnet run
-Client: npm run dev
+Client: npm install, npm run dev
 
-docker build -t sqlserver-northwind .
+docker build -t sqlserver-northwind -f Docker/Dockerfile Docker
 
 docker run -d \
   -e "ACCEPT_EULA=Y" \
@@ -44,4 +44,3 @@ docker run -d \
   sqlserver-northwind
 
 Container ID: b7ead7330bd4d14cbb21361000a69ac22c74f8722b55250348de6ee2d7b28f59
-
