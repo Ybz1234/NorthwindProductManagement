@@ -1,46 +1,68 @@
 # NorthwindProductManagement
-A full stack web application for AllJobs
 
-# sqlserver-northwind
-
-This repository contains a Docker setup to run SQL Server 2022 with the **Northwind** and **LogDb** databases preloaded.
+A full stack web application for AllJobs.
 
 ---
 
-## What’s inside
+## 🧱 Project Overview
 
-- SQL Server 2022 container (`mcr.microsoft.com/mssql/server:2022-latest`)  
-- Two backup files: `Northwind.bak` and `LogDb.bak`  
-- Initialization script to restore the databases on container start  
+This repository contains:
 
----
-
-## Prerequisites
-
-- Docker installed and running  
-- At least 4GB RAM available for the container (recommended)  
-- Port 1433 free on your machine (or change mapping if needed)  
+- A full-stack web app with client and server components
+- A SQL Server 2022 database container preloaded with:
+  - `Northwind` database
+  - `LogDb` database
+- A Docker setup that automatically restores these databases on container startup
 
 ---
 
-## How to run
+## 🐳 What's in the Docker Setup?
 
-### 1. Clone this repo and navigate to it
+- **Base image**: `mcr.microsoft.com/mssql/server:2022-latest`
+- **Database backups**:
+  - `Northwind.bak`
+  - `LogDb.bak`
+- **Init script**:
+  - `restore-databases.sh` runs automatically on container start
+  - Waits for SQL Server to boot, then restores both DBs using `sqlcmd`
+
+---
+
+## ⚙️ Prerequisites
+
+- Docker installed and running
+- At least 4GB RAM available for the container (recommended)
+- Port `1433` available (or adjust if needed)
+
+---
+
+## 🚀 How to Run the Project
+
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/Ybz1234/NorthwindProductManagement.git
 cd NorthwindProductManagement
 
-Server: dotnet run
-Client: npm install, npm run dev
+```
+### 2. Start the Database Container
 
-docker build -t sqlserver-northwind -f Docker/Dockerfile Docker
+```bash
+docker compose up --build -d
 
-docker run -d \
-  -e "ACCEPT_EULA=Y" \
-  -e "SA_PASSWORD=UltraStrongP@ssw0rd123!" \
-  -p 1433:1433 \
-  --name sqlserver-northwind \
-  sqlserver-northwind
+```
 
-Container ID: b7ead7330bd4d14cbb21361000a69ac22c74f8722b55250348de6ee2d7b28f59
+### 3. Start the Server
+```bash
+cd NorthwindProductManagement
+dotnet run
+
+```
+
+### 3. Start the Client
+```bash
+cd client
+npm install
+npm run dev
+
+```

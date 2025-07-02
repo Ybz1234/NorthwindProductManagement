@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  sqlserver:
+    build:
+      context: ./Docker
+      dockerfile: Dockerfile
+    ports:
+      - "1433:1433"
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "UltraStrongP@ssw0rd123!"
+    container_name: northwind-sql
+    volumes:
+      - sql_data:/var/opt/mssql
+
+volumes:
+  sql_data:
