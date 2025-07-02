@@ -59,7 +59,7 @@ dotnet run
 
 ```
 
-### 3. Start the Client
+### 4. Start the Client
 ```bash
 cd client
 npm install
