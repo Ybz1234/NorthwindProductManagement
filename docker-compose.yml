@@ -5,14 +5,10 @@ services:
     build:
       context: ./Docker
       dockerfile: Dockerfile
+    image: northwindproductmanagement-sqlserver:latest
+    container_name: northwind-sql
     ports:
       - "1433:1433"
     environment:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "UltraStrongP@ssw0rd123!"
-    container_name: northwind-sql
-    volumes:
-      - sql_data:/var/opt/mssql
-
-volumes:
-  sql_data:

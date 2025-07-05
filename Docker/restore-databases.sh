@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-# 1) Start SQL Server in the background
 /opt/mssql/bin/sqlservr &
 
-# 2) Wait until SQL is ready
 echo "Waiting for SQL Server to accept connections ..."
 until /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$SA_PASSWORD" -Q "SELECT 1" &>/dev/null
 do
@@ -12,7 +10,6 @@ do
 done
 echo "SQL Server is up – restoring databases."
 
-# 3) Restore Northwind
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$SA_PASSWORD" -Q "
 RESTORE DATABASE [Northwind]
   FROM DISK = '/var/opt/mssql/backup/Northwind.bak'
@@ -21,7 +18,6 @@ RESTORE DATABASE [Northwind]
        REPLACE;
 "
 
-# 4) Restore LogDb
 /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "$SA_PASSWORD" -Q "
 RESTORE DATABASE [LogDb]
   FROM DISK = '/var/opt/mssql/backup/LogDb.bak'
@@ -31,4 +27,4 @@ RESTORE DATABASE [LogDb]
 "
 
 echo "Restores complete – handing control back to sqlservr."
-wait -n        # keep container alive
+wait -n
